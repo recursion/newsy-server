@@ -44,12 +44,12 @@ passport.use('jwt', strategies.jwt);
 passport.use('facebook', strategies.facebook);
 passport.use('google', strategies.google);
 
+// mount api v1 routes
+app.use('/v1', routes);
+
 // serve up our client and any static files it needs
 app.use(express.static(path.join(__dirname, '../client/build/')));
 app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../client/build/index.html')));
-
-// mount api v1 routes
-app.use('/v1', routes);
 
 // if error is not an instanceOf APIError, convert it.
 app.use(error.converter);
