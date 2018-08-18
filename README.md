@@ -1,6 +1,9 @@
 # Newsy: Search multiple news sources for common headlines
-Express server started from https://github.com/danielfsousa/express-rest-es2017-boilerplate
 This package aims to provide an easy method for keyword searching multiple news sites.
+
+
+Express server started from https://github.com/danielfsousa/express-rest-es2017-boilerplate
+This package offers lots of features not currently used here, but it's nice to have these built-in incase we decide we want these features down the road.
 
 # Requirements
 
