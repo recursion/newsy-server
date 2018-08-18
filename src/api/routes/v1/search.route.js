@@ -1,5 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const { newsApi } = require('../../../config/vars');
+const https = require('https');
 
 router
   .route('/')
@@ -17,9 +19,19 @@ router
   .post((req, res) => {
     if (typeof req.body.searchTerm !== 'string') {
         console.error("Incorrect searchTerm value.");
-        return res.send('Invalid Search Term: must be type string.');
+        res.send('Invalid Search Term: must be type string.');
     } else {
-        return res.send('You Searched: ' + JSON.stringify(req.body));
+        let query = 'https://newsapi.org/v2/everything?q=' + req.body.searchTerm + '&apiKey=' + newsApi;
+        https.get(query, (resp) => {
+            let data = '';
+            resp.on('data', (chunk) => {
+                data += chunk;
+            })
+            resp.on('end', () => {
+                // console.log(JSON.parse(data));
+                res.send('You Searched: ' + JSON.stringify(req.body) + ' and got back: ' + data);
+            })
+        });
     }
   });
 
