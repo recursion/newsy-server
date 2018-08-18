@@ -4,6 +4,9 @@ package-lock.json
 # Environment variables
 .env
 
+# Front-End / Client - has its own git repo
+src/client
+
 # Logs
 logs
 *.log
