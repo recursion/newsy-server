@@ -16,5 +16,6 @@ module.exports = {
       ? process.env.MONGO_URI_TESTS
       : process.env.MONGO_URI,
   },
+  newsApi: process.env.NEWS_API_KEY,
   logs: process.env.NODE_ENV === 'production' ? 'combined' : 'dev',
 };
