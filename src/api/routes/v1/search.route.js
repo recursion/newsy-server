@@ -22,9 +22,7 @@ router
         console.error("Incorrect searchTerm value.");
         res.send('Invalid Search Term: must be type string.');
     } else {
-        // we will need to add sources here too - &sources=comma,seperated,sources
-        let query = 'https://newsapi.org/v2/everything?q=' + req.body.searchTerm + '&apiKey=' + newsApi;
-        https.get(query, (resp) => {
+        https.get(buildQuery(req), (resp) => {
             let data = '';
             resp.on('data', (chunk) => {
                 data += chunk;
@@ -37,5 +35,13 @@ router
     }
   });
 
+const buildQuery = (request) => {
+    // we will need to add sources here too - &sources=comma,seperated,sources
+    const apiUrl = 'https://newsapi.org/v2';
+    const searchMethod = '/everything';
+    const searchQuery = '?q=' + request.body.searchTerm;
+    const api = '&apiKey=' + newsApi;
+    return apiUrl + searchMethod + searchQuery + api;
+};
 
 module.exports = router;
