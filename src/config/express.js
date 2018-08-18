@@ -10,6 +10,7 @@ const routes = require('../api/routes/v1');
 const { logs } = require('./vars');
 const strategies = require('./passport');
 const error = require('../api/middlewares/error');
+const path = require('path');
 
 /**
 * Express instance
@@ -42,6 +43,10 @@ app.use(passport.initialize());
 passport.use('jwt', strategies.jwt);
 passport.use('facebook', strategies.facebook);
 passport.use('google', strategies.google);
+
+// serve up our client and any static files it needs
+app.use(express.static(path.join(__dirname, '../client/build/')));
+app.use('/', (req, res) => res.sendFile(path.join(__dirname, '../client/build/index.html')));
 
 // mount api v1 routes
 app.use('/v1', routes);
