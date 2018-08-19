@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { newsApi } = require('../../../config/vars');
-const https = require('https');
+const request = require('request');
 
 router
   .route('/')
@@ -22,17 +22,14 @@ router
         console.error("Incorrect searchTerm value.");
         res.send('Invalid Search Term: must be type string.');
     } else {
-        https.get(buildQuery(req.query.q), (resp) => {
-            let data = '';
-            resp.on('data', (chunk) => {
-                data += chunk;
-            })
-            resp.on('end', () => {
-                // console.log(JSON.parse(data));
-                res.setHeader('Content-Type', 'application/json');
-                res.send(JSON.stringify(data));
-            })
-        });
+        request(buildQuery(req.query.q), (err, response, body) => {
+            if (!err && response.statusCode === 200) {
+                console.log(JSON.parse(body));
+            } else {
+                console.error(err);
+                console.error(`Status Code: ${response.statusCode}`);
+            }
+        })
     }
   });
 
@@ -41,8 +38,11 @@ const buildQuery = (query) => {
     const apiUrl = 'https://newsapi.org/v2';
     const searchMethod = '/everything';
     const searchQuery = '?q=' + query
-    const api = '&apiKey=' + newsApi;
-    return apiUrl + searchMethod + searchQuery + api;
+    const url = apiUrl + searchMethod + searchQuery; // + api;
+    return {
+        url, 
+        headers: {"X-Api-Key": newsApi}
+    };
 };
 
 module.exports = router;
