@@ -39,6 +39,7 @@ const buildQuery = (query) => {
     // we will need to add sources here too - &sources=comma,seperated,sources
     const apiUrl = 'https://newsapi.org/v2';
     const searchMethod = '/everything';
+    // TODO: strip & and ? from query string.
     const searchQuery = '?q=' + query.q;
     const page = '&page=' + query.page || 1;
     const url = apiUrl + searchMethod + searchQuery + page;
