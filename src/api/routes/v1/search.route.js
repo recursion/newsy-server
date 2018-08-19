@@ -35,14 +35,20 @@ router
     }
   });
 
+// remove any spaces, & or ? symbols from a string and replace with %20
+// string => string
+const clean = (str) => str.replace(/[&?p\s]/g, "%20")
+
+// build a query string
+// response.query => request.options
 const buildQuery = (query) => {
     // we will need to add sources here too - &sources=comma,seperated,sources
     const apiUrl = 'https://newsapi.org/v2';
     const searchMethod = '/everything';
-    // TODO: strip & and ? from query string.
-    const searchQuery = '?q=' + query.q;
-    const page = '&page=' + query.page || 1;
+    const searchQuery = '?q=' + clean(query.q);
+    const page = '&page=' + (query.page || 1);
     const url = apiUrl + searchMethod + searchQuery + page;
+    console.log('Sending search query: ', url);
     return {
         url, 
         headers: {"X-Api-Key": newsApi}
