@@ -22,7 +22,7 @@ router
         console.error("Incorrect searchTerm value.");
         res.send('Invalid Search Term: must be type string.');
     } else {
-        request(buildQuery(req.query.q), (err, response, body) => {
+        request(buildQuery(req.query), (err, response, body) => {
             if (!err && response.statusCode === 200) {
                 // console.log(JSON.parse(body));
                 res.setHeader('Content-Type', 'application/json');
@@ -39,8 +39,9 @@ const buildQuery = (query) => {
     // we will need to add sources here too - &sources=comma,seperated,sources
     const apiUrl = 'https://newsapi.org/v2';
     const searchMethod = '/everything';
-    const searchQuery = '?q=' + query
-    const url = apiUrl + searchMethod + searchQuery; // + api;
+    const searchQuery = '?q=' + query.q;
+    const page = '&page=' + query.page || 1;
+    const url = apiUrl + searchMethod + searchQuery + page;
     return {
         url, 
         headers: {"X-Api-Key": newsApi}
