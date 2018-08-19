@@ -16,30 +16,31 @@ router
    * @apiSuccess {Object[]} news List of news.
    *
    */
-  .post((req, res) => {
-    if (typeof req.body.searchTerm !== 'string') {
+  .get((req, res) => {
+    if (typeof req.query.q !== 'string') {
         // we may end up passing validations to its own module as is done in other router
         console.error("Incorrect searchTerm value.");
         res.send('Invalid Search Term: must be type string.');
     } else {
-        https.get(buildQuery(req), (resp) => {
+        https.get(buildQuery(req.query.q), (resp) => {
             let data = '';
             resp.on('data', (chunk) => {
                 data += chunk;
             })
             resp.on('end', () => {
                 // console.log(JSON.parse(data));
-                res.send('You Searched: ' + JSON.stringify(req.body) + ' and got back: ' + data);
+                res.setHeader('Content-Type', 'application/json');
+                res.send(JSON.stringify(data));
             })
         });
     }
   });
 
-const buildQuery = (request) => {
+const buildQuery = (query) => {
     // we will need to add sources here too - &sources=comma,seperated,sources
     const apiUrl = 'https://newsapi.org/v2';
     const searchMethod = '/everything';
-    const searchQuery = '?q=' + request.body.searchTerm;
+    const searchQuery = '?q=' + query
     const api = '&apiKey=' + newsApi;
     return apiUrl + searchMethod + searchQuery + api;
 };
