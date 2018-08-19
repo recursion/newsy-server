@@ -24,7 +24,9 @@ router
     } else {
         request(buildQuery(req.query.q), (err, response, body) => {
             if (!err && response.statusCode === 200) {
-                console.log(JSON.parse(body));
+                // console.log(JSON.parse(body));
+                res.setHeader('Content-Type', 'application/json');
+                res.send(body);
             } else {
                 console.error(err);
                 console.error(`Status Code: ${response.statusCode}`);
