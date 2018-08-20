@@ -19,7 +19,7 @@ router
   .get((req, res) => {
     if (typeof req.query.q !== 'string') {
         // we may end up passing validations to its own module as is done in other router
-        console.error("Incorrect searchTerm value.");
+        console.error("Invalid searchTerm value.");
         res.send('Invalid Search Term: must be type string.');
     } else {
         request(buildQuery(req.query), (err, response, body) => {
