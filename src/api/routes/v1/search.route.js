@@ -48,7 +48,6 @@ const buildQuery = (query) => {
     const searchQuery = '?q=' + clean(query.q);
     const page = '&page=' + (query.page || 1);
     const url = apiUrl + searchMethod + searchQuery + page;
-    console.log('Sending search query: ', url);
     return {
         url, 
         headers: {"X-Api-Key": newsApi}
