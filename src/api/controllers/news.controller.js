@@ -13,13 +13,15 @@ exports.getHeadlines = (req, res) => {
     } else {
       console.error(err);
       console.error(`Status Code: ${response.statusCode}`);
+      res
+        .status(response.statusCode)
+        .send('Error');
     }
   });
 };
 
 // process everything searches here
 exports.search = (req, res) => {
-  console.log('In controller.search with: ', req.query);
   request(buildSearchQuery(req.query), (err, response, body) => {
     if (!err && response.statusCode === 200) {
       // console.log(JSON.parse(body));
@@ -28,6 +30,9 @@ exports.search = (req, res) => {
     } else {
       console.error(err);
       console.error(`Status Code: ${response.statusCode}`);
+      res
+        .status(response.statusCode)
+        .send('Error');
     }
   });
 };
