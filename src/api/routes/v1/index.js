@@ -1,7 +1,7 @@
 const express = require('express');
 const userRoutes = require('./user.route');
 const authRoutes = require('./auth.route');
-const searchRoutes = require('./search.route');
+const newsRoutes = require('./news.route');
 
 const router = express.Router();
 
@@ -15,7 +15,7 @@ router.get('/status', (req, res) => res.send('OK'));
  */
 router.use('/docs', express.static('docs'));
 
-router.use('/search', searchRoutes);
+router.use('/news', newsRoutes);
 router.use('/users', userRoutes);
 router.use('/auth', authRoutes);
 
