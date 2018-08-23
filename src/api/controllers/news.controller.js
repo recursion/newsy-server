@@ -22,6 +22,7 @@ exports.getHeadlines = (req, res) => {
 
 // process everything searches here
 exports.search = (req, res) => {
+  console.log(req.body.test);
   request(buildSearchQuery(req.query), (err, response, body) => {
     if (!err && response.statusCode === 200) {
       // console.log(JSON.parse(body));

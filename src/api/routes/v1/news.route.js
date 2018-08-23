@@ -16,7 +16,7 @@ router
    * @apiSuccess {Object[]} news List of news.
    *
    */
-  .get(controller.search);
+  .post(controller.search);
 
 router
   .route('/headlines')
