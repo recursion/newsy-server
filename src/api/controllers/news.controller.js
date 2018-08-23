@@ -61,7 +61,8 @@ const buildSearchQuery = (query) => {
   const searchMethod = '/everything';
   const searchQuery = `?q=${clean(query.q)}`;
   const page = `&page=${(query.page || 1)}`;
-  const url = apiUrl + searchMethod + searchQuery + page;
+  const sortBy = `&sortBy=${query.sortBy || 'publishedAt'}`;
+  const url = apiUrl + searchMethod + searchQuery + page + sortBy;
   return {
     url,
     headers: { 'X-Api-Key': newsApi },
