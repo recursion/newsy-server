@@ -11,9 +11,9 @@ exports.getSources = (req, res) => {
   if (sources.length === 0) {
     request(buildSourcesQuery(), (err, response, body) => {
       if (!err && response.statusCode === 200) {
-        ({ sources } = body);
+        ({ sources } = JSON.parse(body));
         res.setHeader('Content-Type', 'application/json');
-        res.send(sources);
+        res.send(JSON.stringify(sources));
       } else {
         console.error(err);
         console.error(`Status Code: ${response.statusCode}`);
@@ -24,7 +24,7 @@ exports.getSources = (req, res) => {
     });
   } else {
     res.setHeader('Content-Type', 'application/json');
-    res.send(sources);
+    res.send(JSON.stringify(sources));
   }
 };
 
