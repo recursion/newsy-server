@@ -69,8 +69,8 @@ const buildSourcesQuery = () => {
     url,
     headers: { 'X-Api-Key': newsApiKey },
   };
+};
 
-}
 // build a query string
 // response.query => request.options
 const buildHeadlinesQuery = (query) => {
