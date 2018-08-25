@@ -81,11 +81,19 @@ const buildHeadlinesQuery = (query) => {
   // if no country is selected, just use 'U.S'
   const country = `?country=${query.country || 'us'}`;
 
-  // creates a string using either country or sources (cant use both).
-  const countryOrSources = () => ((query.sources.length > 0) ? reqSources : country);
-  const url = apiUrl + method + countryOrSources();
+  const q = (query.q) ? `&q=${query.q}` : '';
 
-  // console.log('Built headlines query of: ', url);
+  // creates a string using either country or sources (cant use both).
+  const countryOrSources = () => {
+    if (query.sources && query.sources.length > 0) {
+      return reqSources;
+    }
+    return country;
+  };
+
+  const url = apiUrl + method + countryOrSources() + q;
+
+  console.log('Built headlines query of: ', url);
 
   return {
     url,
