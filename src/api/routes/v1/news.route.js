@@ -12,7 +12,7 @@ router
   .get(controller.getSources);
 
 router
-  .route('/headlines')
+  .route('/top-headlines')
   .get(controller.getHeadlines);
 
 module.exports = router;

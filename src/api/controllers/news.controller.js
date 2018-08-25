@@ -75,9 +75,18 @@ const buildSourcesQuery = () => {
 // response.query => request.options
 const buildHeadlinesQuery = (query) => {
   // we will need to add sources here too - &sources=comma,seperated,sources
-  const method = `/top-headlines?country=${query.country || 'us'}`;
-  const page = `&page=${(query.page || 1)}`;
-  const url = apiUrl + method + page;
+  const method = '/top-headlines';
+  const reqSources = `?sources=${query.sources}`;
+
+  // if no country is selected, just use 'U.S'
+  const country = `?country=${query.country || 'us'}`;
+
+  // creates a string using either country or sources (cant use both).
+  const countryOrSources = () => ((query.sources.length > 0) ? reqSources : country);
+  const url = apiUrl + method + countryOrSources();
+
+  // console.log('Built headlines query of: ', url);
+
   return {
     url,
     headers: { 'X-Api-Key': newsApiKey },
@@ -95,8 +104,13 @@ const buildSearchQuery = (query) => {
   const searchMethod = '/everything';
   const searchQuery = `?q=${clean(query.q)}`;
   const page = `&page=${(query.page || 1)}`;
+  const reqSources = `&sources=${query.sources}`;
+  const getSources = () => ((query.sources) ? reqSources : '');
   const sortBy = `&sortBy=${query.sortBy || 'publishedAt'}`;
-  const url = apiUrl + searchMethod + searchQuery + page + sortBy;
+  const url = apiUrl + searchMethod + searchQuery + page + sortBy + getSources();
+
+  // console.log('Built everything query of: ', url);
+
   return {
     url,
     headers: { 'X-Api-Key': newsApiKey },
