@@ -4,7 +4,7 @@ const controller = require('../../controllers/news.controller');
 const router = express.Router();
 
 router
-  .route('/search')
+  .route('/everything')
   .get(controller.search);
 
 router
