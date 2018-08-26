@@ -73,11 +73,16 @@ const buildSourcesQuery = () => {
 
 
 const buildQuery = (target, req) => {
+  // extract our query string
   const i = req.url.indexOf('?');
-  const q = req.url.substr(i + 1);
-  const url = `${apiUrl}/${target}?${q}`;
+  // if there is no query, return an empty string
+  const q = (i > -1) ? req.url.substr(i + 1) : '';
+
+  const baseUrl = `${apiUrl}/${target}`;
+  const url = (q !== '') ? `${baseUrl}?${q}` : baseUrl;
 
   console.log('Built URL: ', url);
+
   return {
     url,
     headers: { 'X-Api-Key': newsApiKey },
