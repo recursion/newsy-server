@@ -1,6 +1,8 @@
 # newsy-server: Simple web-client/api server that proxies requests to newsapi.org.
 This package aims to provide a simple proxy for newsapi.org requests, attaching an api key to the request, and returning the result to the client.
 
+Data powered by [newsapi.org](https://newsapi.org).
+
 Meant to be used with one of the newsy clients such as: https://github.com/recursion/newsy-react-client. (currently the only client - an elm client may be in the works)
 
 Express server cloned from https://github.com/danielfsousa/express-rest-es2017-boilerplate - This package offers way more features than were needed, but it is a robust, and well built boilerplate that included options that may be added later.
@@ -15,6 +17,7 @@ Express server cloned from https://github.com/danielfsousa/express-rest-es2017-b
 
 - Clone the repo and make it yours:
 - Make sure you have a mongo instance up and running.
+- Get yourself an api key from newsapi.org
 
 ```bash
 git clone --depth 1 https://github.com/recursion/newsy-server
