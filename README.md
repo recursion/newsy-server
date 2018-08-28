@@ -1,4 +1,4 @@
-# newsy-server: Serves a web-client, and proxies requests to newsapi.org.
+# newsy-server: Simple web-client/api server that proxies requests to newsapi.org.
 This package aims to provide a simple proxy for newsapi.org requests, attaching an api key to the request, and returning the result to the client.
 
 Meant to be used with one of the newsy clients such as: https://github.com/recursion/newsy-react-client. (currently the only client - an elm client may be in the works)
