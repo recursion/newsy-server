@@ -1,38 +1,51 @@
-# Newsy: Search multiple news sources for common headlines
-This package aims to provide an easy method for keyword searching multiple news sites.
+# newsy-server: Serves a web-client, and proxies requests to newsapi.org.
+This package aims to provide a simple proxy for newsapi.org requests, attaching an api key to the request, and returning the result to the client.
 
+Meant to be used with one of the newsy clients such as: https://github.com/recursion/newsy-react-client. (currently the only client - an elm client may be in the works)
 
-Express server started from https://github.com/danielfsousa/express-rest-es2017-boilerplate
-This package offers lots of features not currently used here, but it's nice to have these built-in incase we decide we want these features down the road.
+Express server cloned from https://github.com/danielfsousa/express-rest-es2017-boilerplate - This package offers way more features than were needed, but it is a robust, and well built boilerplate that included options that may be added later.
 
 # Requirements
 
  - [Node v7.6+](https://nodejs.org/en/download/current/) or [Docker](https://www.docker.com/)
  - [Yarn](https://yarnpkg.com/en/docs/install)
+ - [Mongodb](https://mongodb.com)
 
 ## Getting Started
 
-Clone the repo and make it yours:
+- Clone the repo and make it yours:
+- Make sure you have a mongo instance up and running.
 
 ```bash
-git clone --depth 1 https://github.com/recursion/newsy
-cd newsy
+git clone --depth 1 https://github.com/recursion/newsy-server
+cd newsy-server
 rm -rf .git
 ```
 
-Install dependencies:
+- Install dependencies:
 
 ```bash
 yarn
 ```
 
-Set environment variables:
+- Set environment variables:
 
 ```bash
 cp .env.example .env
 ```
 
-## Running Locally
+- Add a client
+```bash
+git clone --depth 1 https://github.com/recursion/newsy-react-client src/client
+```
+
+- Build the client
+```bash
+cd src/client
+npm run build
+```
+
+## Running The Server Locally
 
 ```bash
 yarn dev
