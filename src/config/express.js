@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const compress = require('compression');
 const methodOverride = require('method-override');
-// const cors = require('cors');
+const cors = require('cors');
 const helmet = require('helmet');
 const passport = require('passport');
 const routes = require('../api/routes/v1');
@@ -35,8 +35,10 @@ app.use(methodOverride());
 // secure apps by setting various HTTP headers
 app.use(helmet());
 
-// enable CORS - Cross Origin Resource Sharing
-// app.use(cors());
+// enable CORS in development - Cross Origin Resource Sharing
+if (process.env.NODE_ENV === 'development') {
+  app.use(cors());
+}
 
 // enable authentication
 app.use(passport.initialize());
